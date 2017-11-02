@@ -24,9 +24,14 @@ $lang = [
         'instruction_text' => '<p>可视化地生成Html表单代码，减少工程师手动码转的辛苦</p>
 <p>产品经理亦可直接使用此工具，直接交付工程师纯净标准的HTML代码。岂不美哉？</p>
 <p>Bootstrap风格用的是v3.3.7 实际上3.x版本的都可以直接使用，不存在兼容性问题</p>
-<br><p>&copy; <a href="https://qingyu.me">qingyu</a></p>',
+<p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
+<a style="padding: 5px;" href="https://github.com/JackyMamba/form-generator" title="HTML 表单 生成工具"><svg aria-hidden="true" class="octicon octicon-mark-github" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+</p>',
         'generate_html' => '生成HTML',
         'generated_html' => '结果HTML',
+        'history_version' => '历史编辑',
+        'save_draft' => '暂存',
+        'hour' => '时',
     ],
     'en_US' => [
         'title' => 'HTML Form Generator',
@@ -51,9 +56,15 @@ $lang = [
         'instruction' => 'Instructions',
         'instruction_text' => '<p>Generate HTML Form code, reduce the hard manual work of engineers</p>
 <p>You can also use it if you’re a PM, directly deliver the code to your R&D, isn\'t that wonderful?</p>
-<p>Bootstrap v3.3.7 achieved, in fact, all v3.x are painless.</p><br><p>&copy; <a href="https://qingyu.me">qingyu</a></p>',
+<p>Bootstrap v3.3.7 achieved, in fact, all v3.x are painless.</p>
+<p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
+<a style="padding: 5px;" target="_blank" href="https://github.com/JackyMamba/form-generator" title="HTML Form Generator"><svg aria-hidden="true" class="octicon octicon-mark-github" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a>
+</p>',
         'generate_html' => 'Generate HTML',
         'generated_html' => 'Generated HTML',
+        'history_version' => 'History Draft',
+        'save_draft' => 'Save Draft',
+        'hour' => 'h',
     ],
 ];
 $lang_id = empty($_COOKIE['switch_lang_id']) ? 'zh_CN' : $_COOKIE['switch_lang_id'];
@@ -146,6 +157,8 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 			background-color: white; padding: 10px 15px;
 			border-radius: 4px; }
 
+		.hfg-right { float: right; }
+
 		.hfg-form-group { display: inline-block; margin-right: 6px; }
 
 		.hfg-item-wrap { position: relative; }
@@ -178,6 +191,12 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 						<option value="native"><?=$i18n['style_native']?></option>
 						<option value="bootstrap_3-3-7">Bootstrap v3.3.7</option>
 					</select>
+				</div>
+			</form>
+			<form class="hfg-form-inline hfg-right hfg-hidden" id="hfg-draft-form" onsubmit="return false">
+				<div class="hfg-form-group">
+					<label for="style"><?=$i18n['history_version']?></label>
+					<select class="hfg-form-control" id="hfg-draft"></select>
 				</div>
 			</form>
 		</div>
@@ -240,6 +259,7 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 			</div>
 
 			<div style="text-align: right">
+				<button type="button" id="saveDraftBtn"><?=$i18n['save_draft']?></button>
 				<button type="button" id="generateHtmlBtn"><?=$i18n['generate_html']?></button>
 				<button type="button" id="generateJsonBtn" style="display: none;">JSON</button>
 			</div>
@@ -272,9 +292,7 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 </div>
 
 <div style="display: none;" id="generate-dialog" title="<?=$i18n['generated_html']?>">
-	<textarea rows="20" style="width: 100%;" title="html">
-
-	</textarea>
+	<textarea rows="20" style="width: 100%;" title="html"></textarea>
 </div>
 
 
@@ -287,6 +305,9 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
     var resultDiv = $('#result-div');
     var i18n = <?=json_encode($i18n)?>;
     var hfgStyleWrapper = $('#hfg-style-wrapper');
+    var draftNode = $('#hfg-draft');
+    var saveDraftBtn = $('#saveDraftBtn');
+    var drafts = Cookies.get('hfg-drafts');
     $('#generateHtmlBtn').click(function () {
         var html = generateHtml();
         $('#generate-dialog>textarea').val(html);
@@ -297,11 +318,11 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
     });
 
     $(document).ready(function () {
-
         var langSwitch = $("#lang");
         langSwitch.find("option[value='<?=$lang_id?>']").prop("selected", true);
         langSwitch.change(function () {
             Cookies.set('switch_lang_id', $(this).val(), {expires: 30});
+            saveDraft();
             location.reload();
         });
 
@@ -309,8 +330,28 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
         styleOptions();
         styleNode.change(function () {
             Cookies.set('style', $(this).val(), {expires: 30});
+            saveDraft();
             location.reload();
         });
+
+        if (!drafts) {
+            drafts = {};
+        } else {
+            drafts = JSON.parse(drafts);
+            $('#hfg-draft-form').removeClass('hfg-hidden');
+            draftNode.append('<option></option>');
+            for (var draft in drafts) {
+                draftNode.append('<option value="' + draft + '">' + draft + '</option>');
+            }
+        }
+        draftNode.change(function () {
+            if (drafts[$(this).val()] != undefined) {
+                formData = drafts[$(this).val()];
+                renderForm();
+            }
+        });
+        saveDraftBtn.click(saveDraft);
+
         renderForm();
 
 
@@ -503,6 +544,26 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
             renderItem(i);
         });
     }
+
+    function saveDraft() {
+        if (formData == false) {
+            return false;
+        }
+        var name = formatDate(new Date());
+        drafts[name] = formData;
+        console.log(JSON.stringify(drafts));
+        Cookies.set('hfg-drafts', JSON.stringify(drafts), {expires: 365});
+    }
+
+    function formatDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        var hour = date.getHours();
+        var m = date.getMinutes();
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + m;
+    }
+
 </script>
 <?php if ($style == 'native') { ?>
 	<script src="js/hfg-style-native.js"></script><?php } elseif ($style == 'bootstrap_3-3-7') { ?>
