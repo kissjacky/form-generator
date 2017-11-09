@@ -29,7 +29,11 @@ function renderFormTag() {
         formTag = '<form class="form-horizontal"></form>';
     }
     resultDiv.append(formTag);
-    $('.hfg-sortable>form').sortable();
+    $('.hfg-sortable>form').sortable({
+        update: function (event, ui) {
+            sortFormData();
+        }
+    }).disableSelection();
 }
 
 function renderItem(index) {

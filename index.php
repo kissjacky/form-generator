@@ -261,7 +261,7 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 			<div style="text-align: right">
 				<button type="button" id="saveDraftBtn"><?=$i18n['save_draft']?></button>
 				<button type="button" id="generateHtmlBtn"><?=$i18n['generate_html']?></button>
-				<button type="button" id="generateJsonBtn" style="display: none;">JSON</button>
+				<button type="button" id="generateJsonBtn">JSON</button>
 			</div>
 		</div>
 	</div>
@@ -314,7 +314,8 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
         $('#generate-dialog').dialog({autoOpen: false, width: '60%'}).dialog('open');
     });
     $('#generateJsonBtn').click(function () {
-        alert(formData.toString());
+        $('#generate-dialog>textarea').val(JSON.stringify(formData));
+        $('#generate-dialog').dialog({autoOpen: false, width: '60%'}).dialog('open');
     });
 
     $(document).ready(function () {
@@ -465,7 +466,6 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
         hfgDialog.find('input[name=style]').change(function () {
             var index = $(this).parent().parent().data('item-index');
             formData[index].style = this.value;
-            console.log(formData[index]);
             renderItem(index);
         });
 
@@ -479,7 +479,6 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
             var item = formData[index];
             hfgDialog.children().addClass('hfg-hidden');
             hfgDialog.data('item-index', index);
-            console.log(item);
             switch (item.type) {
                 case 'text':
                     hfgDialog.find('input[name=name]').val(item.name).parent().removeClass('hfg-hidden');
@@ -551,7 +550,10 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
         }
         var name = formatDate(new Date());
         drafts[name] = formData;
-        console.log(JSON.stringify(drafts));
+        var len = Object.keys(drafts).length;
+        if(len > 4){
+            delete drafts[Object.keys(drafts)[0]];
+		}
         Cookies.set('hfg-drafts', JSON.stringify(drafts), {expires: 365});
     }
 
@@ -562,6 +564,15 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
         var hour = date.getHours();
         var m = date.getMinutes();
         return year + '-' + month + '-' + day + ' ' + hour + ':' + m;
+    }
+    
+    function sortFormData() {
+        var newData = [];
+		$('#result-div > form > div').each(function (i,v) {
+			newData.push(formData[$(v).data('item-index')]);
+        });
+		formData = newData;
+		renderForm();
     }
 
 </script>

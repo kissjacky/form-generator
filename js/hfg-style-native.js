@@ -11,6 +11,11 @@ function styleOptions() {
 function renderFormTag() {
     var formTag = '<form></form>';
     resultDiv.append(formTag);
+    $('.hfg-sortable>form').sortable({
+        update: function (event, ui) {
+            sortFormData();
+        }
+    }).disableSelection();
 }
 
 function renderItem(index) {
