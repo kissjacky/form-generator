@@ -20,12 +20,13 @@ $lang = [
         'email' => 'Email',
         'select' => '下拉选框',
         'values_desc' => '选项："value,描述"',
+        'add' => '添加新元素',
+        'preview' => '预览',
         'instruction' => '说明',
         'instruction_text' => '<p>可视化地生成Html表单代码，减少工程师手动码转的辛苦</p>
 <p>产品经理亦可直接使用此工具，直接交付工程师纯净标准的HTML代码。岂不美哉？</p>
 <p>Bootstrap风格用的是v3.3.7 实际上3.x版本的都可以直接使用，不存在兼容性问题</p>
 <p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
-<a style="padding: 5px;" href="https://github.com/JackyMamba/form-generator" title="HTML 表单 生成工具"><svg aria-hidden="true" class="octicon octicon-mark-github" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a>
 </p>',
         'generate_html' => '生成HTML',
         'generated_html' => '结果HTML',
@@ -53,12 +54,13 @@ $lang = [
         'email' => 'Email',
         'select' => 'Select',
         'values_desc' => 'Options: "value,label"',
+        'add' => 'Add',
+        'preview' => 'Preview',
         'instruction' => 'Instructions',
         'instruction_text' => '<p>Generate HTML Form code, reduce the hard manual work of engineers</p>
 <p>You can also use it if you’re a PM, directly deliver the code to your R&D, isn\'t that wonderful?</p>
 <p>Bootstrap v3.3.7 achieved, in fact, all v3.x are painless.</p>
 <p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
-<a style="padding: 5px;" target="_blank" href="https://github.com/JackyMamba/form-generator" title="HTML Form Generator"><svg aria-hidden="true" class="octicon octicon-mark-github" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg></a>
 </p>',
         'generate_html' => 'Generate HTML',
         'generated_html' => 'Generated HTML',
@@ -95,14 +97,24 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 		}
 
 		body {
-			background-color: black;
-			background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),
+			background-color: whitesmoke;
+
 			radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px),
 			radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px),
 			radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
 			background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
 			background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
 		}
+
+        /*body {*/
+            /*background-color: black;*/
+            /*background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),*/
+            /*radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px),*/
+            /*radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px),*/
+            /*radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);*/
+            /*background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;*/
+            /*background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;*/
+        /*}*/
 
 		#comment-div { min-height: 100px; padding: 15px 20px; background-color: white; border-radius: 4px; }
 
@@ -173,9 +185,9 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 	</style>
 </head>
 <body>
-
+<a href="https://github.com/JackyMamba/form-generator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
 <div class="hfg-container">
-	<div><h3 style="color: #f3f3f3;"><?=$i18n['title']?></h3></div>
+	<div><h3 style="color: black;"><?=$i18n['title']?></h3></div>
 	<div class="hfg-row">
 		<div class="hfg-col-12">
 			<form class="hfg-form-inline" onsubmit="return false">
@@ -203,15 +215,21 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 	</div>
 	<div class="hfg-row">
 		<div class="hfg-col-2" id="comment-div">
-			<h4>
+			<h4 style="font-weight: 600">
                 <?=$i18n['instruction']?>
 			</h4>
+            <hr/>
             <?=$i18n['instruction_text']?>
 		</div>
 		<div class="hfg-col-6">
+
 			<div class="hfg-sortable" id="result-div"></div>
 		</div>
 		<div class="hfg-col-4" id="template-div">
+            <h4 style="font-weight: 600">
+                <?=$i18n['add']?>
+            </h4>
+            <hr/>
 			<div>
 				<button type="button" class="tem-btn" data-type="text">+</button>
 				<label class="control-label"><?=$i18n['input_text']?></label>
