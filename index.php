@@ -23,10 +23,16 @@ $lang = [
         'add' => '添加新元素',
         'preview' => '预览',
         'instruction' => '说明',
-        'instruction_text' => '<p>可视化地生成Html表单代码，减少工程师手动码转的辛苦</p>
-<p>产品经理亦可直接使用此工具，直接交付工程师纯净标准的HTML代码。岂不美哉？</p>
-<p>Bootstrap风格用的是v3.3.7 实际上3.x版本的都可以直接使用，不存在兼容性问题</p>
-<p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
+        'instruction_text' => '
+<p>可视化地生成表单HTML代码</p>
+
+<p>产品经理亦可借此工具直接交付标准HTML代码</p>
+<p>Bootstrap版本：v3.3.7 </p>
+<p>3.x版本皆兼容良好</p>
+<br/><hr/>
+<p>吾辈念兹在兹 愿君终有所成</p>
+<p>一旦再相逢 必是人间殊胜</p>
+<p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;&<a href="http://www.caoyuning.com">yuning</a>&nbsp;
 </p>',
         'generate_html' => '生成HTML',
         'generated_html' => '结果HTML',
@@ -60,7 +66,10 @@ $lang = [
         'instruction_text' => '<p>Generate HTML Form code, reduce the hard manual work of engineers</p>
 <p>You can also use it if you’re a PM, directly deliver the code to your R&D, isn\'t that wonderful?</p>
 <p>Bootstrap v3.3.7 achieved, in fact, all v3.x are painless.</p>
-<p>&copy; <a href="https://qingyu.me">qingyu</a>&nbsp;
+<br/><hr/>
+<p>When Your Promise Is Fulfilled</p>
+<p>We Will Be Ready For Your Return</p>
+<p>&copy; &nbsp;&<a href="http://www.caoyuning.com">yuning</a>&nbsp;<a href="https://qingyu.me">qingyu</a>&nbsp;&<a href="http://www.caoyuning.com">yuning</a>&nbsp;
 </p>',
         'generate_html' => 'Generate HTML',
         'generated_html' => 'Generated HTML',
@@ -185,7 +194,7 @@ $style = empty($_COOKIE['style']) ? 'native' : $_COOKIE['style'];
 	</style>
 </head>
 <body>
-<a href="https://github.com/JackyMamba/form-generator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png"></a>
+<a href="https://github.com/JackyMamba/form-generator"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png"></a>
 <div class="hfg-container">
 	<div><h3 style="color: black;"><?=$i18n['title']?></h3></div>
 	<div class="hfg-row">
